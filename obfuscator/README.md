@@ -14,4 +14,28 @@ It might mimic how some malicious files try to look like normal files but with o
 - Some systems trim trailing spaces in filenames (especially Windows), which may break your trick.
 - Less chance of the filename being flagged as “odd” if it’s cleaner.
 
- 
+## 🛡️ Counter measure:
+To see those hidden characters on Windows:
+
+#### Windows
+```cmd
+dir /x
+```
+#### PowerShell:
+```powershell
+Get-ChildItem | ForEach-Object { $_.Name, ($_.Name.ToCharArray() | ForEach-Object { [int][char]$_ }) }
+```
+#### Linux/Unix
+```bash
+ls -b 
+```
+### ✅ Feature 
+
+| Feature                                         | Included? | Description |
+|------------------------------------------------|-----------|-------------|
+| Rename any file                                | ✅        | You pass `shell.exe` (or any `.exe`) as input |
+| Set a fake base name like `hello_word.mp4`     | ✅        | Via `--fake-name hello_word.mp4` |
+| Insert N invisible Unicode characters (`U+200B`) | ✅        | Controlled via `--invisible 20` (or any number) |
+| Avoid visible spaces (optional)                | ✅        | Use `--visible-spaces 0` or omit the flag (default = 0) |
+| Output ends in `.exe`                          | ✅        | Always renamed to `.exe` so it executes on Windows |
+| UTF-8 / Unicode-safe                           | ✅        | All characters are valid on Windows NTFS and Linux ext4 |
