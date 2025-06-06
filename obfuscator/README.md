@@ -1,3 +1,23 @@
+## Usage:
+```bash 
+~> python3 filename_obfuscation.py -h
+usage: filename_obfuscation.py [-h] [--fakename FAKENAME] [--invisible INVISIBLE] [--visible-spaces VISIBLE_SPACES] original_file
+
+Disguise an .exe file to look like a long .mp4,png etc filename with hidden Unicode characters.
+
+positional arguments:
+  original_file         The original .exe file to rename
+
+options:
+  -h, --help            show this help message and exit
+  --fakename FAKENAME   Visible part of the filename (default: hello_word.mp4)
+  --invisible INVISIBLE
+                        Number of invisible Unicode characters (default: 20)
+  --visible-spaces VISIBLE_SPACES
+                        Number of visible spaces before .exe (default: 12)
+
+Example: python3 filename_obfuscate.py shell.exe --fake-name hello_word.mp4 --invisible 20 --visible-spaces 10
+```
 ## Do you need visible spaces in real-world filename obfuscation?
 - Short answer:
     - No, visible spaces aren’t strictly necessary. The invisible Unicode characters alone (like zero-width spaces \u200B) are enough to break up the filename visually and hide the real extension.
